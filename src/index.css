@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black antialiased selection:bg-black selection:text-white;
+  }
+}
+
+.apple-blur {
+  @apply backdrop-blur-md bg-white/70 border-b border-black/5;
+}
+
+.section-padding {
+  @apply py-24 md:py-32 px-6;
+}
