@@ -5,16 +5,16 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
-  Mic, 
-  Video, 
-  TrendingUp, 
-  CheckCircle2, 
-  ArrowRight, 
-  Play, 
-  Calendar, 
-  Users, 
-  Target, 
+import {
+  Mic,
+  Video,
+  TrendingUp,
+  CheckCircle2,
+  ArrowRight,
+  Play,
+  Calendar,
+  Users,
+  Target,
   Zap,
   ChevronRight,
   Menu,
@@ -22,6 +22,20 @@ import {
   ShieldCheck,
   Clock
 } from 'lucide-react';
+
+// --- Utils ---
+
+export const handleScheduleClick = (source: string) => {
+  // 1. Integración de Rastreo de Leads (Lead Tracking)
+  console.log(`[Lead Tracking] User clicked schedule from: ${source}`);
+  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+    // Si usan Google Analytics / GTM
+    (window as any).dataLayer.push({ event: 'schedule_click', source });
+  }
+
+  // 2. Redirección a Calendly
+  window.open('https://calendly.com/', '_blank'); // Reemplazar con el link exacto cuando lo tengas
+};
 
 // --- Components ---
 
@@ -50,7 +64,7 @@ const Navbar = () => {
           <a href="#problema" className="hover:text-black transition-colors">Problema</a>
           <a href="#sistema" className="hover:text-black transition-colors">El Sistema</a>
           <a href="#precios" className="hover:text-black transition-colors">Planes</a>
-          <button className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/80 transition-all cursor-pointer">
+          <button onClick={() => handleScheduleClick('navbar_desktop')} className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/80 transition-all cursor-pointer">
             Agendar llamada
           </button>
         </div>
@@ -64,7 +78,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -73,7 +87,7 @@ const Navbar = () => {
             <a href="#problema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Problema</a>
             <a href="#sistema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">El Sistema</a>
             <a href="#precios" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Planes</a>
-            <button className="bg-black text-white px-6 py-4 rounded-2xl text-lg font-semibold">
+            <button onClick={() => handleScheduleClick('navbar_mobile')} className="bg-black text-white px-6 py-4 rounded-2xl text-lg font-semibold hover:bg-black/90 active:scale-[0.98] transition-all cursor-pointer">
               Agendar llamada estratégica
             </button>
           </motion.div>
@@ -129,7 +143,7 @@ export default function App() {
           </FadeIn>
           <FadeIn delay={0.3}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="w-full sm:w-auto bg-black text-white px-8 py-5 rounded-2xl text-lg font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-black/10 cursor-pointer">
+              <button onClick={() => handleScheduleClick('hero')} className="w-full sm:w-auto bg-black text-white px-8 py-5 rounded-2xl text-lg font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-black/10 cursor-pointer">
                 Agendar llamada estratégica
               </button>
               <button className="w-full sm:w-auto bg-white text-black border border-black/10 px-8 py-5 rounded-2xl text-lg font-semibold hover:bg-black/5 transition-all flex items-center justify-center gap-2 cursor-pointer">
@@ -148,9 +162,9 @@ export default function App() {
                   <motion.div
                     key={i}
                     animate={{ height: [20, 40, 15, 60, 20] }}
-                    transition={{ 
-                      repeat: Infinity, 
-                      duration: 1.5, 
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.5,
                       delay: i * 0.05,
                       ease: "easeInOut"
                     }}
@@ -160,9 +174,9 @@ export default function App() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
             </div>
-            
+
             {/* Floating Elements */}
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute -top-12 -right-6 md:-right-12 bg-white p-4 rounded-2xl shadow-xl border border-black/5 flex items-center gap-3"
@@ -176,7 +190,7 @@ export default function App() {
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
               className="absolute bottom-12 -left-6 md:-left-12 bg-white p-4 rounded-2xl shadow-xl border border-black/5 flex items-center gap-3"
@@ -304,7 +318,7 @@ export default function App() {
         <div className="relative">
           {/* Connector Line (Desktop) */}
           <div className="hidden md:block absolute top-1/2 left-0 right-0 h-px bg-black/5 -translate-y-1/2 z-0" />
-          
+
           <div className="grid md:grid-cols-3 gap-12 relative z-10">
             {[
               { step: "01", title: "Grabás tu episodio", desc: "Te enviamos una guía de preparación para que el audio y video sean impecables desde el origen.", icon: <Play /> },
@@ -358,7 +372,7 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
+              <button onClick={() => handleScheduleClick('pricing_monthly')} className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
                 Aplicar ahora
               </button>
             </div>
@@ -389,7 +403,7 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-white/90 transition-all shadow-lg shadow-white/5 cursor-pointer">
+              <button onClick={() => handleScheduleClick('pricing_annual')} className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-white/90 transition-all shadow-lg shadow-white/5 cursor-pointer">
                 Aplicar ahora
               </button>
             </div>
@@ -416,7 +430,7 @@ export default function App() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
+              <button onClick={() => handleScheduleClick('pricing_tailored')} className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
                 Solicitar propuesta
               </button>
             </div>
@@ -502,7 +516,59 @@ export default function App() {
         </div>
       </Section>
 
-      {/* 8. CTA Final */}
+      {/* 8. Lead Magnet / Newsletter */}
+      <Section className="bg-emerald-50 relative overflow-hidden py-24">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-200/50 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-emerald-200/50 rounded-full blur-3xl -ml-20 -mb-20 pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-bold tracking-wide uppercase mb-6">
+              <Mic size={16} />
+              Recurso Gratuito
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+              ¿Todavía no estás listo para agendar?
+            </h2>
+            <p className="text-xl text-black/60 mb-10">
+              Dejanos tu email y recibí nuestra guía gratuita: <span className="font-bold text-black">"De oyentes a clientes: La anatomía de un podcast B2B que vende"</span>.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.2}>
+            <form
+              className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto"
+              onSubmit={(e) => {
+                e.preventDefault();
+                console.log('[Lead Tracking] User submitted email for lead magnet');
+                if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                  (window as any).dataLayer.push({ event: 'lead_magnet_submit' });
+                }
+                alert('¡Gracias! Revisá tu bandeja de entrada en los próximos minutos.');
+              }}
+            >
+              <input
+                type="email"
+                placeholder="Tu mejor email laboral..."
+                required
+                className="flex-grow px-6 py-4 rounded-2xl border border-black/10 focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
+              />
+              <button
+                type="submit"
+                className="bg-black text-white px-8 py-4 rounded-2xl font-bold hover:bg-black/90 active:scale-[0.98] transition-all cursor-pointer whitespace-nowrap"
+              >
+                Quiero la guía
+              </button>
+            </form>
+            <p className="text-sm text-black/40 mt-4">
+              100% valor. 0% spam. Podés desuscribirte cuando quieras.
+            </p>
+          </FadeIn>
+        </div>
+      </Section>
+
+      {/* 9. CTA Final */}
       <Section className="pb-40">
         <div className="bg-black text-white rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden">
           {/* Background Decoration */}
@@ -524,7 +590,7 @@ export default function App() {
               </p>
             </FadeIn>
             <FadeIn delay={0.3}>
-              <button className="bg-white text-black px-10 py-6 rounded-2xl text-xl font-bold hover:scale-[1.05] transition-all shadow-2xl shadow-white/10 mb-6 cursor-pointer">
+              <button onClick={() => handleScheduleClick('final_cta')} className="bg-white text-black px-10 py-6 rounded-2xl text-xl font-bold hover:scale-[1.05] transition-all shadow-2xl shadow-white/10 mb-6 cursor-pointer">
                 Agendar llamada estratégica
               </button>
               <p className="text-white/40 text-sm font-medium flex items-center justify-center gap-2">
@@ -544,7 +610,7 @@ export default function App() {
             </div>
             <span className="text-lg font-bold tracking-tight">Edify</span>
           </div>
-          
+
           <div className="flex gap-8 text-sm text-black/40 font-medium">
             <a href="#" className="hover:text-black transition-colors">Términos</a>
             <a href="#" className="hover:text-black transition-colors">Privacidad</a>
