@@ -34,7 +34,7 @@ export const handleScheduleClick = (source: string) => {
   }
 
   // 2. Redirección a Calendly
-  window.open('https://calendly.com/', '_blank'); // Reemplazar con el link exacto cuando lo tengas
+  window.open('https://calendly.com/brunoamoretti/meeting-call', '_blank');
 };
 
 // --- Components ---
@@ -492,25 +492,37 @@ export default function App() {
         <div className="text-center mb-16">
           <FadeIn>
             <p className="text-sm font-bold text-black/40 uppercase tracking-[0.3em] mb-4">Confían en nosotros</p>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-30 grayscale">
-              <div className="text-2xl font-black italic">LOGO_A</div>
-              <div className="text-2xl font-black italic">LOGO_B</div>
-              <div className="text-2xl font-black italic">LOGO_C</div>
-              <div className="text-2xl font-black italic">LOGO_D</div>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 opacity-30 grayscale">
+              <img src="/logos/el-cafetal.jpg" alt="El Cafetal" className="h-12 w-12 rounded-full object-cover" />
+              <img src="/logos/lo-de-davi.png" alt="Lo de Davi" className="h-10 object-contain" />
+              <img src="/logos/carlos-devis.webp" alt="Carlos Devis" className="h-10 object-contain" />
+              <img src="/logos/uptin.jpg" alt="Up10 Media" className="h-12 w-12 rounded-full object-cover" />
+              <img src="/logos/hatch-fm.svg" alt="Hatch FM" className="h-8 object-contain" />
             </div>
           </FadeIn>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
           <FadeIn delay={0.1}>
-            <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 italic text-xl text-black/60 leading-relaxed">
-              "Próximamente casos de estudio detallados sobre cómo transformamos la autoridad de nuestros clientes."
+            <div className="bg-white p-10 rounded-[2.5rem] border border-black/5">
+              <p className="italic text-xl text-black/60 leading-relaxed mb-6">
+                "Edify le dio a El Cafetal una identidad clara y una estrategia que se nota en cada episodio. La audiencia creció, el contenido conecta más y cada detalle tiene un propósito. Hizo toda la diferencia."
+              </p>
+              <div>
+                <p className="font-semibold text-black/80">Josué Moreno</p>
+                <p className="text-sm text-black/40">Host de El Cafetal · Teólogo</p>
+              </div>
             </div>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 flex flex-col justify-center items-center text-center">
-              <Users size={40} className="text-black/10 mb-4" />
-              <p className="text-black/40 font-medium">Sumate a las marcas que están liderando la conversación en su industria.</p>
+            <div className="bg-white p-10 rounded-[2.5rem] border border-black/5">
+              <p className="italic text-xl text-black/60 leading-relaxed mb-6">
+                "Desde Sobrenatural hasta Lo de Davi Live, Edify fue clave en la evolución de mi podcast. Entienden el contenido, la audiencia y cómo hacer crecer un proyecto sin perder autenticidad. Un equipo de otro nivel."
+              </p>
+              <div>
+                <p className="font-semibold text-black/80">David Di Marco</p>
+                <p className="text-sm text-black/40">Creador de contenido · Lo de Davi</p>
+              </div>
             </div>
           </FadeIn>
         </div>
@@ -539,13 +551,44 @@ export default function App() {
           <FadeIn delay={0.2}>
             <form
               className="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                console.log('[Lead Tracking] User submitted email for lead magnet');
-                if (typeof window !== 'undefined' && (window as any).dataLayer) {
-                  (window as any).dataLayer.push({ event: 'lead_magnet_submit' });
+                const form = e.currentTarget;
+                const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement;
+                const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+                const email = emailInput?.value;
+
+                if (!email) return;
+
+                // Disable button and show loading
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
+
+                try {
+                  const res = await fetch('/api/send-guide', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                  });
+
+                  if (res.ok) {
+                    console.log('[Lead Tracking] Guide sent successfully');
+                    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+                      (window as any).dataLayer.push({ event: 'lead_magnet_submit' });
+                    }
+                    submitBtn.textContent = '¡Enviada! ✓';
+                    submitBtn.className = submitBtn.className.replace('bg-black', 'bg-emerald-600');
+                    emailInput.value = '';
+                    emailInput.disabled = true;
+                  } else {
+                    throw new Error('Error al enviar');
+                  }
+                } catch (err) {
+                  console.error('Error:', err);
+                  submitBtn.textContent = 'Reintentar';
+                  submitBtn.disabled = false;
+                  alert('Hubo un error al enviar la guía. Por favor intentá de nuevo.');
                 }
-                alert('¡Gracias! Revisá tu bandeja de entrada en los próximos minutos.');
               }}
             >
               <input
