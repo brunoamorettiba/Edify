@@ -63,7 +63,8 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black/60">
           <a href="#problema" className="hover:text-black transition-colors">Problema</a>
           <a href="#sistema" className="hover:text-black transition-colors">El Sistema</a>
-          <a href="#precios" className="hover:text-black transition-colors">Planes</a>
+          <a href="#reels" className="hover:text-black transition-colors">Reels & Ads</a>
+          <a href="#precios" className="hover:text-black transition-colors">Podcast</a>
           <button onClick={() => handleScheduleClick('navbar_desktop')} className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/80 transition-all cursor-pointer">
             Agendar llamada
           </button>
@@ -86,7 +87,8 @@ const Navbar = () => {
           >
             <a href="#problema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Problema</a>
             <a href="#sistema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">El Sistema</a>
-            <a href="#precios" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Planes</a>
+            <a href="#reels" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Reels & Ads</a>
+            <a href="#precios" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Podcast</a>
             <button onClick={() => handleScheduleClick('navbar_mobile')} className="bg-black text-white px-6 py-4 rounded-2xl text-lg font-semibold hover:bg-black/90 active:scale-[0.98] transition-all cursor-pointer">
               Agendar llamada estratégica
             </button>
@@ -119,6 +121,8 @@ const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode, delay?: nu
 // --- Main App ---
 
 export default function App() {
+  const [reelsAnnual, setReelsAnnual] = useState(false);
+
   return (
     <div className="font-sans">
       <Navbar />
@@ -337,6 +341,124 @@ export default function App() {
               </FadeIn>
             ))}
           </div>
+        </div>
+      </Section>
+
+      {/* 4.5 Reels & Ads Packs */}
+      <Section id="reels" className="bg-white">
+        <div className="text-center mb-20">
+          <FadeIn>
+            <span className="inline-block bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">Nuevo</span>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Reels & Ads Packs</h2>
+            <p className="text-xl text-black/60 max-w-2xl mx-auto">Contenido listo para publicar y pautar. El mismo reel funciona orgánico y como Ad.</p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <div className="flex items-center justify-center gap-4 mt-10">
+              <span className={`font-semibold transition-colors ${!reelsAnnual ? 'text-black' : 'text-black/40'}`}>Mensual</span>
+              <button
+                onClick={() => setReelsAnnual(!reelsAnnual)}
+                className={`relative w-14 h-7 rounded-full transition-colors cursor-pointer ${reelsAnnual ? 'bg-emerald-500' : 'bg-black/10'}`}
+              >
+                <div className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow transition-transform ${reelsAnnual ? 'translate-x-7' : ''}`} />
+              </button>
+              <span className={`font-semibold transition-colors ${reelsAnnual ? 'text-black' : 'text-black/40'}`}>Anual</span>
+              {reelsAnnual && <span className="text-emerald-600 text-sm font-bold">Ahorrá 15%</span>}
+            </div>
+          </FadeIn>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 items-end">
+          {/* Starter */}
+          <FadeIn delay={0.1}>
+            <div className="bg-neutral-50 p-10 rounded-[2.5rem] border border-black/5 shadow-sm">
+              <h3 className="text-xl font-bold mb-2">Starter</h3>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-4xl font-bold">${reelsAnnual ? '170' : '200'}</span>
+                <span className="text-black/40">/ mes</span>
+              </div>
+              {reelsAnnual && <p className="text-emerald-600 text-sm font-bold mb-6">$2.040 /año — Ahorrás $360</p>}
+              {!reelsAnnual && <div className="mb-6" />}
+              <ul className="space-y-4 mb-10">
+                {[
+                  "4 Reels editados al mes",
+                  "Subtítulos animados",
+                  "Formato multi-plataforma",
+                  "Listos para usar como Ads"
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-black/70">
+                    <CheckCircle2 size={18} className="text-black/20" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => handleScheduleClick('reels_starter')} className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
+                Empezar ahora
+              </button>
+            </div>
+          </FadeIn>
+
+          {/* Growth */}
+          <FadeIn delay={0.2}>
+            <div className="bg-black text-white p-10 rounded-[2.5rem] shadow-2xl relative scale-105 z-10">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+                Más Popular
+              </div>
+              <h3 className="text-xl font-bold mb-2">Growth</h3>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-4xl font-bold">${reelsAnnual ? '254' : '299'}</span>
+                <span className="text-white/40">/ mes</span>
+              </div>
+              {reelsAnnual && <p className="text-emerald-400 text-sm font-bold mb-6">$3.048 /año — Ahorrás $540</p>}
+              {!reelsAnnual && <div className="mb-6" />}
+              <ul className="space-y-4 mb-10">
+                {[
+                  "8 Reels editados al mes",
+                  "4 Guiones estratégicos",
+                  "Subtítulos animados",
+                  "Optimizados para Ads",
+                  "Formato multi-plataforma"
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-white/70">
+                    <CheckCircle2 size={18} className="text-white/20" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => handleScheduleClick('reels_growth')} className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-white/90 transition-all shadow-lg shadow-white/5 cursor-pointer">
+                Empezar ahora
+              </button>
+            </div>
+          </FadeIn>
+
+          {/* Scale */}
+          <FadeIn delay={0.3}>
+            <div className="bg-neutral-50 p-10 rounded-[2.5rem] border border-black/5 shadow-sm">
+              <h3 className="text-xl font-bold mb-2">Scale</h3>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-4xl font-bold">${reelsAnnual ? '424' : '499'}</span>
+                <span className="text-black/40">/ mes</span>
+              </div>
+              {reelsAnnual && <p className="text-emerald-600 text-sm font-bold mb-6">$5.088 /año — Ahorrás $900</p>}
+              {!reelsAnnual && <div className="mb-6" />}
+              <ul className="space-y-4 mb-10">
+                {[
+                  "16 Reels editados al mes",
+                  "8 Guiones estratégicos",
+                  "Estrategia de hooks",
+                  "Versiones A/B para Ads",
+                  "Soporte prioritario"
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-center gap-3 text-black/70">
+                    <CheckCircle2 size={18} className="text-black/20" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => handleScheduleClick('reels_scale')} className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
+                Empezar ahora
+              </button>
+            </div>
+          </FadeIn>
         </div>
       </Section>
 
