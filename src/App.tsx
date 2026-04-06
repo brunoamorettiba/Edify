@@ -64,7 +64,7 @@ const Navbar = () => {
           <a href="#problema" className="hover:text-black transition-colors">Problema</a>
           <a href="#sistema" className="hover:text-black transition-colors">El Sistema</a>
           <a href="#reels" className="hover:text-black transition-colors">Reels & Ads</a>
-          <a href="#precios" className="hover:text-black transition-colors">Podcast</a>
+          <a href="#precios" className="hover:text-black transition-colors">Podcast Plans</a>
           <button onClick={() => handleScheduleClick('navbar_desktop')} className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/80 transition-all cursor-pointer">
             Agendar llamada
           </button>
@@ -88,7 +88,7 @@ const Navbar = () => {
             <a href="#problema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Problema</a>
             <a href="#sistema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">El Sistema</a>
             <a href="#reels" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Reels & Ads</a>
-            <a href="#precios" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Podcast</a>
+            <a href="#precios" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Podcast Plans</a>
             <button onClick={() => handleScheduleClick('navbar_mobile')} className="bg-black text-white px-6 py-4 rounded-2xl text-lg font-semibold hover:bg-black/90 active:scale-[0.98] transition-all cursor-pointer">
               Agendar llamada estratégica
             </button>
@@ -132,17 +132,17 @@ export default function App() {
         <div className="text-center max-w-4xl mx-auto">
           <FadeIn>
             <span className="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest uppercase bg-black/5 rounded-full text-black/60">
-              Podcast Strategy Agency
+              Podcast & Content Strategy Agency
             </span>
           </FadeIn>
           <FadeIn delay={0.1}>
             <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[1.05] mb-8">
-              Tu podcast puede ser tu mejor <span className="text-black/40">máquina de ventas.</span>
+              Tu contenido puede ser tu mejor <span className="text-black/40">máquina de ventas.</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.2}>
             <p className="text-xl md:text-2xl text-black/60 max-w-2xl mx-auto mb-12 leading-relaxed">
-              Transformamos podcasts en sistemas de autoridad que generan leads calificados y cierran ventas de alto valor.
+              Transformamos tu contenido en un sistema de autoridad que genera leads calificados y cierra ventas de alto valor.
             </p>
           </FadeIn>
           <FadeIn delay={0.3}>
@@ -592,7 +592,7 @@ export default function App() {
               </h3>
               <ul className="space-y-6">
                 {[
-                  "Tu podcast es solo un hobby sin fines comerciales.",
+                  "Tu contenido es solo un hobby sin fines comerciales.",
                   "Buscás la edición más barata del mercado.",
                   "No tenés un producto o servicio de alto valor para vender.",
                   "Querés resultados mágicos sin involucrarte en la grabación.",
@@ -745,7 +745,7 @@ export default function App() {
           <div className="relative z-10">
             <FadeIn>
               <h2 className="text-4xl md:text-7xl font-bold tracking-tighter mb-8">
-                Si vas a hacer un podcast, <br />
+                Si vas a crear contenido, <br />
                 <span className="text-white/40">hacelo estratégico.</span>
               </h2>
             </FadeIn>
