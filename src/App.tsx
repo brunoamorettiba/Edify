@@ -64,7 +64,8 @@ const Navbar = () => {
           <a href="#problema" className="hover:text-black transition-colors">Problema</a>
           <a href="#sistema" className="hover:text-black transition-colors">El Sistema</a>
           <a href="#reels" className="hover:text-black transition-colors">Reels & Ads</a>
-          <a href="#precios" className="hover:text-black transition-colors">Podcast Plans</a>
+          <a href="#bundles" className="hover:text-black transition-colors">Bundles</a>
+          <a href="#precios" className="hover:text-black transition-colors">Podcast</a>
           <button onClick={() => handleScheduleClick('navbar_desktop')} className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-black/80 transition-all cursor-pointer">
             Agendar llamada
           </button>
@@ -88,6 +89,7 @@ const Navbar = () => {
             <a href="#problema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Problema</a>
             <a href="#sistema" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">El Sistema</a>
             <a href="#reels" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Reels & Ads</a>
+            <a href="#bundles" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Bundles</a>
             <a href="#precios" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-medium">Podcast Plans</a>
             <button onClick={() => handleScheduleClick('navbar_mobile')} className="bg-black text-white px-6 py-4 rounded-2xl text-lg font-semibold hover:bg-black/90 active:scale-[0.98] transition-all cursor-pointer">
               Agendar llamada estratégica
@@ -367,23 +369,40 @@ export default function App() {
           </FadeIn>
         </div>
 
+        {/* Reel Test Banner */}
+        <FadeIn>
+          <div className="mb-12 bg-gradient-to-r from-emerald-50 to-white p-8 md:p-10 rounded-[2rem] border border-emerald-200/50 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3">
+                Probá sin compromiso
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">Reel Test — <span className="text-emerald-600">$89</span> <span className="text-black/40 text-xl font-medium">pago único</span></h3>
+              <p className="text-black/60">1 Reel editado desde tu contenido actual · Subtítulos animados · Entrega en 3 días · Si seguís, se descuenta del primer mes.</p>
+            </div>
+            <button onClick={() => handleScheduleClick('reels_test')} className="bg-black text-white px-8 py-4 rounded-2xl font-bold hover:scale-[1.02] transition-all whitespace-nowrap cursor-pointer">
+              Pedir mi Reel Test
+            </button>
+          </div>
+        </FadeIn>
+
         <div className="grid md:grid-cols-3 gap-8 items-end">
           {/* Starter */}
           <FadeIn delay={0.1}>
             <div className="bg-neutral-50 p-10 rounded-[2.5rem] border border-black/5 shadow-sm">
               <h3 className="text-xl font-bold mb-2">Starter</h3>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl font-bold">${reelsAnnual ? '170' : '200'}</span>
+                <span className="text-4xl font-bold">${reelsAnnual ? '169' : '199'}</span>
                 <span className="text-black/40">/ mes</span>
               </div>
-              {reelsAnnual && <p className="text-emerald-600 text-sm font-bold mb-6">$2.040 /año — Ahorrás $360</p>}
+              {reelsAnnual && <p className="text-emerald-600 text-sm font-bold mb-6">$2.028 /año — Ahorrás $360</p>}
               {!reelsAnnual && <div className="mb-6" />}
               <ul className="space-y-4 mb-10">
                 {[
                   "4 Reels editados al mes",
                   "Subtítulos animados",
                   "Formato multi-plataforma",
-                  "Listos para usar como Ads"
+                  "Listos para usar como Ads",
+                  "Entrega quincenal"
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-black/70">
                     <CheckCircle2 size={18} className="text-black/20" />
@@ -405,18 +424,19 @@ export default function App() {
               </div>
               <h3 className="text-xl font-bold mb-2">Growth</h3>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl font-bold">${reelsAnnual ? '254' : '299'}</span>
+                <span className="text-4xl font-bold">${reelsAnnual ? '297' : '349'}</span>
                 <span className="text-white/40">/ mes</span>
               </div>
-              {reelsAnnual && <p className="text-emerald-400 text-sm font-bold mb-6">$3.048 /año — Ahorrás $540</p>}
+              {reelsAnnual && <p className="text-emerald-400 text-sm font-bold mb-6">$3.564 /año — Ahorrás $624</p>}
               {!reelsAnnual && <div className="mb-6" />}
               <ul className="space-y-4 mb-10">
                 {[
                   "8 Reels editados al mes",
-                  "4 Guiones estratégicos",
+                  "4 Guiones estratégicos con hooks",
                   "Subtítulos animados",
                   "Optimizados para Ads",
-                  "Formato multi-plataforma"
+                  "Formato multi-plataforma",
+                  "Entrega semanal"
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-white/70">
                     <CheckCircle2 size={18} className="text-white/20" />
@@ -435,17 +455,18 @@ export default function App() {
             <div className="bg-neutral-50 p-10 rounded-[2.5rem] border border-black/5 shadow-sm">
               <h3 className="text-xl font-bold mb-2">Scale</h3>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-4xl font-bold">${reelsAnnual ? '424' : '499'}</span>
+                <span className="text-4xl font-bold">${reelsAnnual ? '509' : '599'}</span>
                 <span className="text-black/40">/ mes</span>
               </div>
-              {reelsAnnual && <p className="text-emerald-600 text-sm font-bold mb-6">$5.088 /año — Ahorrás $900</p>}
+              {reelsAnnual && <p className="text-emerald-600 text-sm font-bold mb-6">$6.108 /año — Ahorrás $1.080</p>}
               {!reelsAnnual && <div className="mb-6" />}
               <ul className="space-y-4 mb-10">
                 {[
-                  "16 Reels editados al mes",
-                  "8 Guiones estratégicos",
-                  "Estrategia de hooks",
+                  "14 Reels editados al mes",
+                  "7 Guiones estratégicos",
+                  "Estrategia de hooks por buyer persona",
                   "Versiones A/B para Ads",
+                  "Análisis mensual de rendimiento",
                   "Soporte prioritario"
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-black/70">
@@ -462,20 +483,155 @@ export default function App() {
         </div>
       </Section>
 
+      {/* 4.7 Authority Bundles (cross-sell) */}
+      <Section id="bundles" className="bg-white">
+        <div className="text-center mb-16">
+          <FadeIn>
+            <span className="inline-block bg-black text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6">Authority Bundles</span>
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Podcast y Reels, <span className="text-black/40">un solo sistema.</span></h2>
+            <p className="text-xl text-black/60 max-w-2xl mx-auto">El mismo contenido, multiplicado. Un punto de contacto, cero duplicación.</p>
+          </FadeIn>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Authority Starter */}
+          <FadeIn delay={0.1}>
+            <div className="bg-neutral-50 p-10 rounded-[2.5rem] border border-black/5 shadow-sm h-full flex flex-col">
+              <h3 className="text-2xl font-bold mb-2">Authority Starter</h3>
+              <p className="text-black/60 mb-6">Para fundadores construyendo autoridad desde cero.</p>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="text-5xl font-bold">$999</span>
+                <span className="text-black/40 text-lg">/ mes</span>
+              </div>
+              <p className="text-emerald-600 text-sm font-bold mb-8">Ahorrás $99/mes</p>
+              <ul className="space-y-4 mb-10 flex-grow">
+                {[
+                  "Plan Founder (Podcast) — 4 episodios/mes",
+                  "Plan Growth (Reels) — 8 reels + 4 guiones/mes",
+                  "Estrategia integrada: los reels salen de tus episodios",
+                  "Un único punto de contacto",
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3 text-black/70">
+                    <CheckCircle2 size={18} className="text-black/20 flex-shrink-0 mt-1" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-black/40 text-xs mb-6 italic">Sujeto a disponibilidad de cupos Founder.</p>
+              <button onClick={() => handleScheduleClick('bundle_starter')} className="w-full py-4 rounded-2xl border border-black/10 font-semibold hover:bg-black hover:text-white transition-all cursor-pointer">
+                Aplicar al Bundle Starter
+              </button>
+            </div>
+          </FadeIn>
+
+          {/* Authority Pro */}
+          <FadeIn delay={0.2}>
+            <div className="bg-black text-white p-10 rounded-[2.5rem] shadow-2xl relative h-full flex flex-col">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
+                Máximo impacto
+              </div>
+              <h3 className="text-2xl font-bold mb-2">Authority Pro</h3>
+              <p className="text-white/60 mb-6">Para marcas B2B que quieren dominar su nicho en audio, video y paid.</p>
+              <div className="flex items-baseline gap-2 mb-2">
+                <span className="text-5xl font-bold">$1.599</span>
+                <span className="text-white/40 text-lg">/ mes</span>
+              </div>
+              <p className="text-emerald-400 text-sm font-bold mb-8">Ahorrás $199/mes</p>
+              <ul className="space-y-4 mb-10 flex-grow">
+                {[
+                  "Plan Strategic (Podcast) — 4 ep · 8–10 clips c/u",
+                  "Plan Scale (Reels) — 14 reels + 7 guiones + A/B",
+                  "Estrategia multi-canal integrada",
+                  "Consultoría estratégica trimestral",
+                  "Soporte prioritario"
+                ].map((feature, i) => (
+                  <li key={i} className="flex items-start gap-3 text-white/80">
+                    <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0 mt-1" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <button onClick={() => handleScheduleClick('bundle_pro')} className="w-full py-4 rounded-2xl bg-white text-black font-bold hover:bg-white/90 transition-all shadow-lg shadow-white/5 cursor-pointer">
+                Aplicar al Bundle Pro
+              </button>
+            </div>
+          </FadeIn>
+        </div>
+      </Section>
+
       {/* 5. Planes y Precios */}
       <Section id="precios" className="bg-neutral-50">
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <FadeIn>
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">Inversión en Autoridad</h2>
             <p className="text-xl text-black/60">Elegí el plan que mejor se adapte a tu etapa actual.</p>
           </FadeIn>
         </div>
 
+        {/* Founder Plan — Destacado con escasez */}
+        <FadeIn>
+          <div className="mb-8 bg-black text-white rounded-[2.5rem] p-10 md:p-12 relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500 text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-5">
+                  <ShieldCheck size={14} /> Solo 3 cupos · Precio fundador
+                </div>
+                <h3 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">Founder</h3>
+                <p className="text-white/70 text-lg mb-6">
+                  Precio exclusivo para los primeros 3 clientes fundadores. Pensado para quienes están construyendo autoridad desde cero.
+                </p>
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-5xl md:text-6xl font-bold">$749</span>
+                  <span className="text-white/40 text-xl">/ mes</span>
+                </div>
+                <p className="text-white/40 text-sm">Al completar los 3 cupos, el plan pasa a $999/mes.</p>
+              </div>
+              <div>
+                <ul className="space-y-4 mb-8">
+                  {[
+                    "4 Episodios al mes",
+                    "5 Clips estratégicos por episodio",
+                    "Edición enfocada en retención",
+                    "Show notes + títulos SEO",
+                    "Compromiso mínimo de 3 meses",
+                    "Caso de estudio compartido al mes 3"
+                  ].map((feature, i) => (
+                    <li key={i} className="flex items-center gap-3 text-white/80">
+                      <CheckCircle2 size={18} className="text-emerald-400 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button onClick={() => handleScheduleClick('pricing_founder')} className="w-full py-4 rounded-2xl bg-emerald-500 text-white font-bold hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20 cursor-pointer">
+                  Aplicar al plan Founder
+                </button>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* Piloto Banner */}
+        <FadeIn delay={0.1}>
+          <div className="mb-12 bg-white p-6 md:p-8 rounded-[2rem] border border-black/5 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-black/5 text-black/70 rounded-full text-[10px] font-bold uppercase tracking-widest mb-2">
+                Probá nuestro sistema
+              </div>
+              <h4 className="text-xl md:text-2xl font-bold mb-1">Piloto — <span className="text-black">$299</span> <span className="text-black/40 text-base font-medium">pago único</span></h4>
+              <p className="text-black/60 text-sm md:text-base">1 Episodio completo + 5 clips estratégicos + show notes. Si continuás, se descuenta del primer mes.</p>
+            </div>
+            <button onClick={() => handleScheduleClick('pricing_pilot')} className="bg-white border border-black/10 text-black px-6 py-3 rounded-2xl font-semibold hover:bg-black hover:text-white transition-all whitespace-nowrap cursor-pointer">
+              Aplicar al Piloto
+            </button>
+          </div>
+        </FadeIn>
+
         <div className="grid md:grid-cols-3 gap-8 items-end">
-          {/* Plan Mensual */}
+          {/* Strategic (Mensual) */}
           <FadeIn delay={0.1}>
             <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-sm">
-              <h3 className="text-xl font-bold mb-2">Plan Mensual</h3>
+              <h3 className="text-xl font-bold mb-2">Strategic</h3>
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-bold">$1.199</span>
                 <span className="text-black/40">/ mes</span>
@@ -483,10 +639,11 @@ export default function App() {
               <ul className="space-y-4 mb-10">
                 {[
                   "4 Episodios al mes",
-                  "3–5 Clips por episodio",
-                  "Edición estratégica",
-                  "Enfoque en conversión",
-                  "Show notes & Títulos SEO"
+                  "8–10 Clips estratégicos por episodio",
+                  "Edición profesional audio + video",
+                  "Guiones de hooks psicológicos",
+                  "Show notes + títulos SEO avanzado",
+                  "Estrategia de distribución mensual"
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-black/70">
                     <CheckCircle2 size={18} className="text-black/20" />
@@ -500,13 +657,13 @@ export default function App() {
             </div>
           </FadeIn>
 
-          {/* Plan Anual */}
+          {/* Strategic Anual */}
           <FadeIn delay={0.2}>
             <div className="bg-black text-white p-10 rounded-[2.5rem] shadow-2xl relative scale-105 z-10">
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">
                 Mejor Valor
               </div>
-              <h3 className="text-xl font-bold mb-2">Plan Anual</h3>
+              <h3 className="text-xl font-bold mb-2">Strategic Anual</h3>
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-4xl font-bold">$11.988</span>
                 <span className="text-white/40">/ año</span>
@@ -514,10 +671,11 @@ export default function App() {
               <p className="text-emerald-400 text-sm font-bold mb-8">Ahorrás 20% ($2.400 USD)</p>
               <ul className="space-y-4 mb-10">
                 {[
-                  "Todo lo del plan mensual",
+                  "Todo lo del plan Strategic",
                   "Prioridad en la agenda",
-                  "Consultoría trimestral",
-                  "Soporte prioritario"
+                  "Consultoría estratégica trimestral",
+                  "Soporte prioritario",
+                  "Precio fijo durante 12 meses"
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-3 text-white/70">
                     <CheckCircle2 size={18} className="text-white/20" />
@@ -534,7 +692,7 @@ export default function App() {
           {/* Plan Tailored */}
           <FadeIn delay={0.3}>
             <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-sm">
-              <h3 className="text-xl font-bold mb-2">Plan Tailored</h3>
+              <h3 className="text-xl font-bold mb-2">Tailored</h3>
               <p className="text-black/40 mb-8">Soluciones específicas para necesidades complejas.</p>
               <p className="text-black/60 mb-10 italic">
                 "Necesidades específicas requieren soluciones específicas."
